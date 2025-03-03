@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Flyer for the Career Fair 2025</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: rgb(223, 193, 159);
+            color: black;
+            font-family: Arial, sans-serif;
+            text-align: center;
+        }
+
+
+        body::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRQ2fjP4skW3GfI2RNNlTMPouk6FZ_1bC3aSA&s') center/cover;
+            opacity: 0.4;
+            z-index: -1;
+        }
+
+
+        .header {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 20px;
+            padding: 20px;
+        }
+
+        .logo {
+            width: 120px;
+            height: auto;
+        }
+
+        .name {
+            font-family: Georgia, 'Times New Roman', Times, serif;
+            font-size: 24px;
+            font-weight: bold;
+            padding: 10px 20px;
+            border: 2px solid black;
+            border-radius: 10px;
+            background-color: white;
+            color: black;
+            display: inline-block;
+        }
+
+        .event {
+            font-size: 40px;
+            margin-top: 10px;
+            font-weight: bold;
+            text-transform: uppercase;
+        }
+
+        .quotes {
+            font-size: 20px;
+            margin: 20px 0;
+            font-style: italic;
+        }
+
+        .agenda {
+            font-size: 30px;
+            border: 2px solid black;
+            padding: 10px;
+            display: inline-block;
+            border-radius: 5px;
+            background-color: aquamarine;
+        }
+
+        .container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 50px;
+            padding: 20px;
+        }
+
+        .agendaDetails {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            align-items: center;
+        }
+
+        .agenda-item {
+            background-color: cornflowerblue;
+            padding: 15px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            width: 300px;
+            text-align: center;
+            color: white;
+        }
+
+        .ulmcareer img {
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+
+        .time {
+            background-color: rgba(255, 0, 0, 0.2);
+            padding: 15px;
+            border-radius: 10px;
+            border: 2px solid darkred;
+            width: fit-content;
+            box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
+            margin: 20px auto;
+        }
+
+        @media (max-width: 768px) {
+            .header {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .event {
+                font-size: 30px;
+            }
+
+            .container {
+                flex-direction: column;
+                gap: 20px;
+            }
+        }
+        .button {
+    color: red;
+    font-size: 20px; /* Increases font size */
+    padding: 10px 20px; /* Adds padding to make the button bigger */
+}
+
+
+    </style>
+</head>
+
+<body>
+
+
+    <div class="header">
+        <img src="https://educationusa.state.gov/sites/default/files/field_hei_logo/ulm_logo.png" class="logo"
+            alt="ULM Logo">
+        <p class="name">University of Louisiana at Monroe</p>
+    </div>
+
+
+    <h1 class="event">Computer Science Career Networking Event</h1>
+
+
+    <p class="quotes"><u>You never get a second chance to make a first impression!</u></p>
+
+
+    <h1 class="agenda"><u>Agenda</u></h1>
+
+    <div class="container">
+
+        <div class="agendaDetails">
+            <div class="agenda-item">
+                <p><b>Introduction</b></p>
+                <p>9:30 AM - 9:50 AM</p>
+            </div>
+            <div class="agenda-item">
+                <p><b>Students Project Presentation</b></p>
+                <p>10:00 AM - 11:00 AM</p>
+            </div>
+            <div class="agenda-item">
+                <p><b>Networking with Recruiters</b></p>
+                <p>11:00 AM - 12:00 PM</p>
+            </div>
+        </div>
+
+
+        <div class="ulmcareer">
+            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTvGU1xvNpKG57EGKxe9J8y5b9pa3F3Ga9MgA&s"
+                alt="Career Fair Image">
+        </div>
+    </div>
+
+
+    <div class="time">
+        <p><b>Date:</b> March 28th, 2025</p>
+        <p><b>Time:</b> 9:30 AM to 12:00 PM</p>
+        <p><b>Host:</b> Department of Computer Science, College of Business and Social Science</p>
+        <p><b>Contact:</b> Dr. Shreekumari (sreekumari@ulm.edu)</p>
+        <p><b>Registration:</b> Required</p>
+    </div>
+
+    <div class="button">
+       
+        <a href="registration.html" class="button" target="_blank"><button>Register Now</button></a>  
+    </div>
+    
+   
+
+</body>
+
+</html>

@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title> Restaurant Review</title>
+    <style>
+        .box1{
+            margin-left: 60px;
+        }
+
+        .box2{
+            margin-left: 30px;
+        }
+
+        .box3{
+            margin-left: 70px;
+        }
+
+        .box4{
+            margin-left: 55px;
+        }
+        .main{
+            margin-left: 275px;
+        }
+
+       
+
+    </style>
+</head>
+
+<body>
+    <h1 class="main"><u>Restaurant Reviews</u></h1>
+    <a href="restaurant.html" class="link1" target=" _blank">Home</a>
+    <a href="detailPage.html" class="link2" target=" _blank">Add Review</a>
+    <a href ="about.html" class=" link3" target=" _blank">About</a>
+
+
+    <form action="https://wp.zybooks.com/form-viewer.php" target="_blank" method="post" enctype="multipart/form-data">
+        <h1> <u>Add Review</u></h1>
+        <p>
+            <label for="name">Name: </label>
+            <input type="text" id="name" name="name" class="box1" placeholder="Enter your name" required  >
+        </p>
+
+        <p>
+            <label for="rest">Restaurant: </label>
+            <select id="rest" name= "rest" class="box2" required>
+                <option value="" disabled selected>Select the Hotel</option>
+                <option value="rest1">Corner Coffee House</option>
+                <option value="rest2">Mountainers Hotel</option>
+            </select>
+        </p>
+
+        <p>
+            <label for="rests">Rate: </label>
+            <input type="number" id="rests" class="box3"  name="rests" min="1" max="10" required>
+        </p>
+
+        <p>
+           Details: 
+            <textarea id="detail" name= "detail" class="box4" placeholder="Write your feedbacks. We are ready to take feedback from you.
+        Thank you for visiting us." rows="10" cols="30" required></textarea>
+        </p>
+
+
+        <p>
+            <input type = "submit" value="Submit">
+        </p>
+
+    </form>
+   
+    <footer>&copy; 2025 Restaurant Review </footer>
+
+</body>
+
+</html>

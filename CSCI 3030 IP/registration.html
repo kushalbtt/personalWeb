@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Registration Form</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <style>
+     
+
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-image: url('https://www.ulm.edu/aces/ace_talons.png');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            margin: 0;
+        }
+        .logo{
+            width: 3px;
+            height: 3px;
+        }
+
+        .form-container {
+            background-color: rgba(96, 8, 8, 0.997);
+            color: white;
+            padding: 40px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            width: 100%;
+            max-width: 400px;
+        }
+
+        h2 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: inline-block;
+            margin-bottom: 8px;
+        }
+
+        input {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+
+        button {
+            width: 100%;
+            padding: 12px;
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        .box2 {
+            margin-left: 10px;
+        }
+        #area{
+            padding-bottom: 2000px;
+        }
+        
+    </style>
+</head>
+
+<body>
+    
+    <div class="form-container">
+        <h2>Registration Form</h2>
+        <form
+            action="https://script.google.com/macros/s/AKfycbyI8L0WWL11ep_qjxaoYhDrmKU7XsRfGbS8f35OrpHQO00WcfhQDQwyvQQn_Mc2Axg/exec"
+            method="POST">
+
+        
+            <label for="first">Full Name:</label>
+            <input type="text" id="first" name="first" required>
+
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" required>
+
+            <label for="phone">Phone Number:</label>
+            <input type="text" id="phone" name="phone" required>
+            <div class="backImage">
+
+            </div>
+
+            <p>
+                <label for="classes">Year of Study: </label>
+                <select id="classes" name="classes" class="box2" required>
+                    <option value="" disabled selected>Select the Year</option>
+                    <option value="Freshman">Freshman</option>
+                    <option value="Sophomore">Sophomore</option>
+                    <option value="Junior">Junior</option>
+                    <option value="Senior">Senior</option>
+                </select>
+            </p>
+
+            <label for="areas">Areas of Interest in Computer Science:</label>
+            <textarea id="areas" name="areas" required></textarea>
+
+
+            <button type="submit">Register</button>
+        </form>
+    </div>
+</body>
+
+</html>

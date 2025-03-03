@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Exercise Work SuperSimple</title>
+</head>
+
+<body>
+    <p> Today we are going to work with superSimple to do the erercise.</p>
+
+    <!-- <p onclick ="
+        console.log(`Welcome to ${name}\n`);
+        "></p>
+        <p> Can I get your order please.\n</p>
+        <button onclick=" 
+        cost += 20;
+        console.log(`Item added Total: ${cost}`);
+        ">Coffee</button>
+
+        <button onclick=" 
+            cost += 120;
+            console.log(`Item added Total: ${cost}`);
+        ">Momo</button>
+
+        <button onclick=" 
+            cost += 200;
+            console.log(`Item added Total: ${cost}`);
+        ">Thakalai Khana</button>
+
+        <button onclick=" 
+            cost += 1000;
+            console.log(`Item added Total: ${cost}`);
+        ">Whole Chiken Special</button>
+
+        <button onclick="
+            cost = 0;
+            console.log(`Bill Cleared`);
+            //console.log(`Your total bill: ${total}`);
+        ">Clear Bill</button> 
+         */-->
+
+        
+   <button onclick="
+           let dg = prompt('Enter the temp: ');
+           let  ut = prompt('Enter the unit: ');
+            alert(convertTemperature(dg, ut));
+   "> Change to Temperature</button>
+    
+    <script>
+        
+            let res = 0;
+
+        function convertTemperature(dg, ut){
+            
+
+            if(ut === 'c'){
+                res = (dg-32)*5/9;
+                return (`The result of the given temp is ${res}.C`)
+            }
+            else if (ut == 'f'){ 
+                res = (dg*9/5)+32;
+                return (`The result of the given temp is ${res}.F`)
+            }
+
+        }
+
+    </script>
+</body>
+
+</html>

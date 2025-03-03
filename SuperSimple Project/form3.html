@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta http-eqiu="X-UA-Compatible" content="IE=edge">
+        <title>Form3</title>
+    </head>
+    <body>
+       
+            <form action="https://script.google.com/macros/s/AKfycbzQrX5vgNUSAQYhdrrOb45K3mvX92cua9G3RXGhlgAwqRgXrh1t_IaeguYANhZmr3kEsQ/exec"
+method="POST">
+<p>
+<label for="dob">Date of birth:</label>
+<input type="date" name="dob" id="dob" required>
+</p>
+<p>
+<label for="pin">Four digit PIN:</label>
+<input type="text" name="pin" id="pin" maxlength="4" pattern="^\d{4}$"
+title="Exactly 4 digits" required>
+</p>
+<p>
+<label for="pickNum">Number between 1 and 10:</label>
+<input type="number" name="pickNum" id="pickNum" min="1" max="10"
+required>
+</p>
+<p>
+<label for="emailAddr">Email address:</label>
+<input type="email" name="emailAddr" id="emailAddr" required>
+</p>
+
+<input type="Submit" id="sub">
+</form>
+        
+
+    </body>
+</html>

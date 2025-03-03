@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>HTml LOG IN to GOOGLE DOCS</title>
+    <meta http-eqiu="X-UA-Compatible" content="IE=edge">
+    <style>
+        *{
+            box-sizing: border-box;
+            padding: 0px;
+            margin: 0px;
+            font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+            font-size: large;
+        }
+        body{
+            height: 100vh;
+            align-items: center;
+            justify-content:center;
+            display: flex;
+            background-color: rgb(78, 82, 162);        
+        }
+        .container{
+            width: 300px;
+            height: 20px;
+            padding: 30px;
+            border: 1px solid;
+            border-radius: 10px;
+            background-color: blue;
+            position:relative;
+            text-align: center;
+            
+
+
+        }
+        h1{
+            color:black;
+            font-family: 'Courier New', Courier, monospace;
+            font-size: medium;
+            margin-bottom: 10px;
+        
+        }
+        input, textarea{
+            width: 100px;
+            padding: 10px;
+            margin-bottom: 10px;         
+        }
+        #submit{
+            border: none;
+            background-color: bisque;
+            color: aliceblue;
+            width: 200px;
+            margin-top: 10px;
+            border-radius: 5px;
+        }
+        #submit:hover{
+            background-color:brown;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="conatiner">
+        <form
+            action="https://script.google.com/macros/s/AKfycbzxuDWXISGbOqaskUav-Lj8hQdn0q3khTJR31MZwZMa-6YAGbQIjCj9GlHnCee2cNc5/exec"
+            method="POST">
+            <h1>
+                Contact Us
+            </h1>
+
+            <p>
+                <label for="name">Name: </label>
+                <input type="text" id="name" name="name" required>
+            </p>
+
+            <p>
+                <label for="email">Email: </label>
+                <input type="email" id="email" name="email" required>
+            </p>
+            <p>
+                <label for="age">Age: </label>
+                <input type="number" id="age" name="age" max="100" min="21" required>
+            </p>
+            <p>
+                <label for="msg">Message: </label>
+                <textarea id="msg" name="msg" row="10" cols="25"></textarea>
+            </p>
+            <input type="submit" Value="Done">
+        </form>
+    </div>
+
+</body>
+
+</html>
