@@ -2,12 +2,15 @@
 async function loadSection(sectionId) {
     try {
         const response = await fetch(`${sectionId}.html`);
-        if (!response.ok) throw new Error(`Failed to load ${sectionId}`);
+        if (!response.ok) {
+            console.error(`Failed to load ${sectionId}: ${response.status} ${response.statusText}`);
+            return false;
+        }
         const content = await response.text();
         const sectionElement = document.getElementById(`${sectionId}-section`);
         if (!sectionElement) {
             console.error(`Section element not found: ${sectionId}-section`);
-            return;
+            return false;
         }
         sectionElement.innerHTML = content;
         console.log(`Loaded section: ${sectionId}`);
@@ -31,7 +34,11 @@ async function handleScrollLink(e) {
     const sectionElement = document.getElementById(`${sectionId}-section`);
     if (!sectionElement || !sectionElement.innerHTML.trim()) {
         console.log(`Section ${sectionId} not loaded, loading now...`);
-        await loadSection(sectionId);
+        const loaded = await loadSection(sectionId);
+        if (!loaded) {
+            console.error(`Failed to load section ${sectionId}`);
+            return;
+        }
     }
     
     // Find the section element within the loaded content
@@ -70,6 +77,51 @@ function addScrollLinkListeners() {
     });
 }
 
+// Form submission handling
+function initializeContactForm() {
+    const contactForm = document.getElementById('contactForm');
+    if (!contactForm) return;
+
+    contactForm.addEventListener('submit', function(e) {
+        e.preventDefault();
+        const form = e.target;
+        const submitBtn = document.getElementById('submitBtn');
+        const formStatus = document.getElementById('formStatus');
+        const formData = new FormData(form);
+
+        submitBtn.disabled = true;
+        submitBtn.innerHTML = `<i class="fas fa-spinner fa-spin"></i> Sending...`;
+
+        fetch(form.action, {
+            method: 'POST',
+            body: formData,
+            headers: {
+                'Accept': 'application/json'
+            }
+        }).then(response => {
+            if (response.ok) {
+                formStatus.innerHTML = `<div class="success-message">Message sent successfully!</div>`;
+                formStatus.style.display = 'block';
+                form.reset();
+            } else {
+                response.json().then(data => {
+                    formStatus.innerHTML = `<div class="error-message">${data.errors.map(error => error.message).join(", ")}</div>`;
+                    formStatus.style.display = 'block';
+                })
+            }
+        }).catch(error => {
+            formStatus.innerHTML = `<div class="error-message">Oops! There was a problem submitting your form.</div>`;
+            formStatus.style.display = 'block';
+        }).finally(() => {
+            submitBtn.disabled = false;
+            submitBtn.innerHTML = `<span class="btn-text">Send Message</span><i class="fas fa-paper-plane"></i>`;
+            setTimeout(() => {
+                formStatus.style.display = 'none';
+            }, 4000);
+        });
+    });
+}
+
 // Load all sections
 document.addEventListener('DOMContentLoaded', async function() {
     console.log('DOM Content Loaded');
@@ -82,11 +134,15 @@ document.addEventListener('DOMContentLoaded', async function() {
 
     // Load sections
     for (const sectionId of sectionIds) {
-        await loadSection(sectionId);
+        const loaded = await loadSection(sectionId);
+        if (!loaded) {
+            console.error(`Failed to load section ${sectionId}`);
+        }
     }
 
     // Add scroll link listeners after all content is loaded
     addScrollLinkListeners();
+    initializeContactForm();
 
     // Handle initial page load with hash
     if (window.location.hash) {
@@ -148,49 +204,6 @@ document.addEventListener('DOMContentLoaded', async function() {
     // Start observing the document with the configured parameters
     contentObserver.observe(document.body, { childList: true, subtree: true });
 
-    // Form submission handling
-    document.getElementById('contactForm').addEventListener('submit', function(e) {
-        e.preventDefault();
-        
-        const submitBtn = document.getElementById('submitBtn');
-        const formStatus = document.getElementById('formStatus');
-        const btnText = submitBtn.querySelector('.btn-text');
-        
-        // Disable submit button and show loading state
-        submitBtn.disabled = true;
-        btnText.textContent = 'Sending...';
-        submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i><span class="btn-text">Sending...</span>';
-        
-        // Create a hidden iframe for form submission
-        const iframe = document.createElement('iframe');
-        iframe.style.display = 'none';
-        document.body.appendChild(iframe);
-        
-        // Submit the form to the iframe
-        this.target = 'form-submit-iframe';
-        this.submit();
-        
-        // Show success message
-        formStatus.innerHTML = '<div class="success-message"><i class="fas fa-check-circle"></i> Message sent successfully!</div>';
-        formStatus.style.display = 'block';
-        
-        // Reset form
-        this.reset();
-        
-        // Reset button state after a delay
-        setTimeout(() => {
-            submitBtn.disabled = false;
-            btnText.textContent = 'Send Message';
-            submitBtn.innerHTML = '<i class="fas fa-paper-plane"></i><span class="btn-text">Send Message</span>';
-            
-            // Hide success message after 3 seconds
-            formStatus.style.display = 'none';
-            
-            // Remove the iframe
-            document.body.removeChild(iframe);
-        }, 3000);
-    });
-
     // Add scroll-based animations
     const sections = document.querySelectorAll('.section');
     const options = {
@@ -213,7 +226,7 @@ document.addEventListener('DOMContentLoaded', async function() {
         observer.observe(section);
     });
 
-    // Mobile menu toggle (you can add this if you want a mobile menu)
+    // Mobile menu toggle
     const createMobileMenu = () => {
         const navbar = document.querySelector('.navbar');
         const navLinks = document.querySelector('.nav-links');
@@ -233,4 +246,4 @@ document.addEventListener('DOMContentLoaded', async function() {
     if (window.innerWidth <= 768) {
         createMobileMenu();
     }
-}); 
+});
