@@ -1,67 +1,101 @@
+let pageTransitionOverlay = null;
+
 // Load section content
 async function loadSection(sectionId) {
     try {
         const response = await fetch(`${sectionId}.html`);
-        if (!response.ok) {
-            console.error(`Failed to load ${sectionId}: ${response.status} ${response.statusText}`);
-            return false;
-        }
-        const content = await response.text();
         const sectionElement = document.getElementById(`${sectionId}-section`);
         if (!sectionElement) {
             console.error(`Section element not found: ${sectionId}-section`);
             return false;
         }
+
+        if (!response.ok) {
+            console.error(`Failed to load ${sectionId}: ${response.status} ${response.statusText}`);
+            sectionElement.innerHTML = `<div class="load-error">Failed to load <strong>${sectionId}</strong>. Try serving the site using a local server (e.g. <code>python3 -m http.server</code>) and open <code>http://localhost:8000</code>.</div>`;
+            return false;
+        }
+
+        const content = await response.text();
         sectionElement.innerHTML = content;
         console.log(`Loaded section: ${sectionId}`);
         return true;
     } catch (error) {
         console.error(`Error loading ${sectionId}:`, error);
+        const sectionElement = document.getElementById(`${sectionId}-section`);
+        if (sectionElement) {
+            sectionElement.innerHTML = `<div class="load-error">Error loading <strong>${sectionId}</strong>. Check the browser console. If you're opening this file directly (file://), serve the folder with a local HTTP server.</div>`;
+        }
         return false;
     }
+}
+
+function getNavbarHeight() {
+    const navbar = document.querySelector('.navbar');
+    return navbar ? navbar.offsetHeight : 0;
+}
+
+async function ensureSectionReady(sectionId) {
+    const sectionElement = document.getElementById(`${sectionId}-section`);
+    if (!sectionElement) {
+        console.error(`Section container missing for ${sectionId}`);
+        return null;
+    }
+
+    if (!sectionElement.innerHTML.trim()) {
+        const loaded = await loadSection(sectionId);
+        if (!loaded) return null;
+    }
+
+    const targetSection = sectionElement.querySelector(`section#${sectionId}`);
+    if (!targetSection) {
+        console.error('Target section not found in DOM:', sectionId);
+        return null;
+    }
+
+    return targetSection;
+}
+
+async function runWithPageTransition(sectionId, task) {
+    if (!pageTransitionOverlay) {
+        await task();
+        return;
+    }
+
+    return new Promise(resolve => {
+        pageTransitionOverlay.setAttribute('data-target', sectionId || '');
+        pageTransitionOverlay.classList.add('active');
+        setTimeout(async () => {
+            await task();
+            setTimeout(() => {
+                pageTransitionOverlay.classList.remove('active');
+                resolve();
+            }, 400);
+        }, 200);
+    });
+}
+
+async function navigateToSection(sectionId) {
+    if (!sectionId) return;
+    await runWithPageTransition(sectionId, async () => {
+        const targetSection = await ensureSectionReady(sectionId);
+        if (!targetSection) return;
+        const targetOffset = targetSection.offsetTop - getNavbarHeight();
+        window.scrollTo({
+            top: targetOffset,
+            behavior: 'smooth'
+        });
+        history.replaceState(null, '', `#${sectionId}`);
+    });
 }
 
 // Handle smooth scrolling
 async function handleScrollLink(e) {
     e.preventDefault();
     const targetId = this.getAttribute('href');
-    console.log('Scroll link clicked:', targetId);
-    
-    // Extract section ID from href (e.g., "#contact" -> "contact")
+    if (!targetId || !targetId.startsWith('#')) return;
     const sectionId = targetId.substring(1);
-    
-    // Ensure the target section is loaded
-    const sectionElement = document.getElementById(`${sectionId}-section`);
-    if (!sectionElement || !sectionElement.innerHTML.trim()) {
-        console.log(`Section ${sectionId} not loaded, loading now...`);
-        const loaded = await loadSection(sectionId);
-        if (!loaded) {
-            console.error(`Failed to load section ${sectionId}`);
-            return;
-        }
-    }
-    
-    // Find the section element within the loaded content
-    const targetSection = sectionElement.querySelector(`section#${sectionId}`);
-    if (!targetSection) {
-        console.error('Target section not found:', targetId);
-        return;
-    }
-
-    const navbar = document.querySelector('.navbar');
-    if (!navbar) {
-        console.error('Navbar not found');
-        return;
-    }
-
-    const navbarHeight = navbar.offsetHeight;
-    const targetOffset = targetSection.offsetTop - navbarHeight;
-    
-    console.log('Scrolling to:', targetId, 'at offset:', targetOffset);
-    window.scrollTo({
-        top: targetOffset,
-        behavior: 'smooth'
-    });
+    await navigateToSection(sectionId);
 }
 
 // Add event listeners to scroll links
@@ -126,6 +160,10 @@ function initializeContactForm() {
 document.addEventListener('DOMContentLoaded', async function() {
     console.log('DOM Content Loaded');
     const sectionIds = ['home', 'about', 'experience', 'projects', 'contact'];
+
+    pageTransitionOverlay = document.createElement('div');
+    pageTransitionOverlay.className = 'page-transition-overlay';
+    document.body.appendChild(pageTransitionOverlay);
     
     // Add click event listeners to all navigation links
     document.querySelectorAll('.nav-links a[href^="#"]').forEach(link => {
@@ -147,20 +185,13 @@ document.addEventListener('DOMContentLoaded', async function() {
     // Handle initial page load with hash
     if (window.location.hash) {
         const sectionId = window.location.hash.substring(1);
-        const sectionElement = document.getElementById(`${sectionId}-section`);
-        if (sectionElement) {
-            const targetSection = sectionElement.querySelector(`section#${sectionId}`);
-            if (targetSection) {
-                setTimeout(() => {
-                    const navbar = document.querySelector('.navbar');
-                    const navbarHeight = navbar.offsetHeight;
-                    const targetOffset = targetSection.offsetTop - navbarHeight;
-                    window.scrollTo({
-                        top: targetOffset,
-                        behavior: 'smooth'
-                    });
-                }, 100);
-            }
+        const targetSection = await ensureSectionReady(sectionId);
+        if (targetSection) {
+            const targetOffset = targetSection.offsetTop - getNavbarHeight();
+            window.scrollTo({
+                top: targetOffset,
+                behavior: 'smooth'
+            });
         }
     }
 
@@ -194,11 +225,22 @@ document.addEventListener('DOMContentLoaded', async function() {
 
     // Add a mutation observer to watch for dynamic content changes
     const contentObserver = new MutationObserver((mutations) => {
+        // Only add listeners when newly added nodes actually contain scroll links
+        let shouldAdd = false;
         mutations.forEach((mutation) => {
             if (mutation.addedNodes.length) {
-                addScrollLinkListeners();
+                mutation.addedNodes.forEach(node => {
+                    if (node.nodeType === 1) { // ELEMENT_NODE
+                        if (node.classList && node.classList.contains('scroll-link')) {
+                            shouldAdd = true;
+                        } else if (node.querySelector && node.querySelector('.scroll-link')) {
+                            shouldAdd = true;
+                        }
+                    }
+                });
             }
         });
+        if (shouldAdd) addScrollLinkListeners();
     });
 
     // Start observing the document with the configured parameters
