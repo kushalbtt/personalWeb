@@ -3,185 +3,222 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link rel="stylesheet" href="personal.css">
-    <script src="https://kit.fontawesome.com/585dfc4edb.js" crossorigin="anonymous"></script>
+    <meta name="description" content="Professional portfolio of Kushal Bhattarai - Computer Science Student and Software Developer">
+    <title>Kushal Bhattarai | Software Developer</title>
+    <link rel="stylesheet" href="Personal.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script src="script.js" defer></script>
 </head>
 <body>
-    <div id="header">
+    <!-- Navigation -->
+    <nav class="navbar">
         <div class="container">
-            <nav>
-                <img src="photo/logo.jpg" class="logo">
-                <ul>
-                    <li><a href="#">Home</a></li>
-                    <li><a href="#">About</a></li>
-                    <li><a href="#">Service</a></li>
-                    <li><a href="#">Protfolio</a></li>
-                    <li><a href="#">Contact</a></li>
-                     
-                </ul>
-            </nav>
-           <div class="header-text">
-            <p>frontEnd/BackEnd Programmer.</p>
-            <h1>Hi, I'm <span>Kushal Bhattarai</span><br> from Nepal.</h1>
-
-           </div>
-        </div>
-    </div>
-    <div id="about" >
-        <div class ="container">
-            <div class ="row">
-                <div class="about-col-1">
-                    <img src="photo/man.jpeg">
-                </div>
-                <div class="about-col-2">
-                <h1 class="sub-title">About me</h1>
-                <p> Lorem ipsum dolor sit amet consectetur adipisicg elit. In epudiandae perferendis, veritatis aspernatur maxime numquam molestias vero necessitatibus sequi, dicta exercitationem provident voluptatum neque ab hic illo dolor dolorem fuga. Lorem ipsum dolor sit, amet consectetur adipisicing elit. Expedita consectetur earum quasi alias, ex molestias enim maxime quibusdam laborum eos deserunt repudiandae dolor asperiores quis, perspiciatis accusantium voluptas provident at?</p>
-                
-
-                <div class="tab-titles">
-                    <p class="tab-links active-link" onclick="opentab('Skills')">Skills</p>
-                    <p class="tab-links" onclick="opentab('Experience')">Experience</p>
-                    <p class="tab-links" onclick="opentab('Education')">Education</p>
-                </div>
-                <div class="tab-contents active-tab" id="Skills">
-                    <ul>
-                        <li><span>UI?UX</span><br>Designing web/App Interface</li>
-                        <li><span>Web Development</span><br>Web development master</li>
-                        <li><span>App Development</span><br>App Master</li>
-                    </ul>
-                </div>
-                <div class="tab-contents" id="Experience">
-                    <ul>
-                        <li><span>2021 - present</span><br>Involved in various Research Project</li>
-                        <li><span>2024-present</span><br>Worked in apple and tata company for 2 years as a intern.</li>
-                        <li><span>2024-present</span><br>Helped apple to upgrade their technology</li>
-                    </ul>
-                </div>
-                <div class="tab-contents" id="Education">
-                    <ul>
-                        <li><span>2010- 2018</span><br>Nawalpur Secondary Boarding School</li>
-                        <li><span>2019 -2021</span><br>Caspian Valley College</li>
-                        <li><span>2023- Present</span><br>University of Louisiana at Monroe</li>
-                    </ul>
-                </div>
-            </div> 
+            <div class="logo">KB</div>
+            <ul class="nav-links">
+                <li><a href="#home" class="active">Home</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#projects">Projects</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+            <div class="menu-toggle">
+                <i class="fas fa-bars"></i>
             </div>
         </div>
-    </div>
-    <!------------------------------Services----------------------------->
-    <div id="services">
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
         <div class="container">
-            <h1 class = "sub-title">My Services</h1>
-            <div class="services-list">
-               <div>
-                <i class="fa-solid fa-life-ring"></i>
-                <h2> Web Development</h2>
-                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Error, aliquam accusantium consequuntur laborum quidem quam reiciendis dolorem nam fugit repellat ea, maxime totam. Sequi, ipsam. Ab vero reprehenderit ipsum fugiat. Lorem ipsum, dolor sit amet consectetur adipisicing elit. Veniam ullam accusantium incidunt, possimus provident alias? Possimus, porro. Pariatur officiis ea eum hic, fugiat consequatur doloremque. Quidem molestias ipsam debitis qui. </p>
-                <a href="#"> Learn More</a>
-               </div>
-
-               <div>
-                <i class="fa-solid fa-web-awesome"></i>
-                <h2> App Development</h2>
-                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Error, aliquam accusantium consequuntur laborum quidem quam reiciendis dolorem nam fugit repellat ea, maxime totam. Sequi, ipsam. Ab vero reprehenderit ipsum fugiat. Lorem ipsum, dolor sit amet consectetur adipisicing elit. Veniam ullam accusantium incidunt, possimus provident alias? Possimus, porro. Pariatur officiis ea eum hic, fugiat consequatur doloremque. Quidem molestias ipsam debitis qui. </p>
-                <a href="#"> Learn More</a>
-               </div>
-
-               <div>
-                <i class="fa-brands fa-webflow"></i>
-                <h2> Mood Development</h2>
-                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Error, aliquam accusantium consequuntur laborum quidem quam reiciendis dolorem nam fugit repellat ea, maxime totam. Sequi, ipsam. Ab vero reprehenderit ipsum fugiat. Lorem ipsum, dolor sit amet consectetur adipisicing elit. Veniam ullam accusantium incidunt, possimus provident alias? Possimus, porro. Pariatur officiis ea eum hic, fugiat consequatur doloremque. Quidem molestias ipsam debitis qui. </p>
-                <a href="#"> Learn More</a>
-               </div>
-             
+            <div class="hero-content">
+                <h1 class="hero-title">Hi, I'm <span class="highlight">Kushal Bhattarai</span></h1>
+                <p class="hero-subtitle">A dedicated Computer Science student at the University of Louisiana at Monroe, passionate about software development and research. Currently maintaining a 3.95 GPA and recognized for excellence in academic research.</p>
+                <div class="hero-buttons">
+                    <a href="#projects" class="btn primary-btn">View My Work</a>
+                    <a href="#contact" class="btn secondary-btn">Contact Me</a>
+                </div>
             </div>
-
+            <div class="hero-image">
+                <img src="webPhtoto.jpg" alt="Kushal Bhattarai" class="profile-photo">
+            </div>
         </div>
+    </section>
 
-    </div>
-    <!----------------------Portfolio------------------->
-
-    <div id="portfolio">
+    <!-- About Section -->
+    <section id="about" class="about">
         <div class="container">
-            <h1 class= "sub-title">My Work</h1>
-            <div class="workList">
-                <div class="work">
-                    <img src="photo/okm.jpeg">
-                    <div class = "layer">
-                        <h3>Web Design App</h3>
-                        <p>This app will guide you to make a perfect website.</p>
-                        <a href="#"><i class="fa-solid fa-seedling"></i></a>
+            <h2 class="section-title">About Me</h2>
+            <div class="about-content">
+                <div class="about-text">
+                    <div class="education">
+                        <h3>Education</h3>
+                        <div class="education-item">
+                            <h4>University of Louisiana at Monroe</h4>
+                            <p>Bachelor in Computer Science (Expected August 2027)</p>
+                            <p>Relevant Coursework: Python, Data Structures, Calculus, Statistics, Algorithms, Advanced Discrete Mathematics</p>
+                        </div>
                     </div>
                 </div>
-                 <div class="work">
-                    <img src="photo/htg.jpeg">
-                    <div class = "layer">
-                        <h3>Img Icone</h3>
-                        <p>This app will guide you to make a perfect icone of the app and for the design.</p>
-                        <a href="#"><i class="fa-solid fa-users-rectangle"></i></a>
-                    </div>
-                </div>  
-                <div class="work">
-                    <img src="photo/design phto.jpeg">
-                    <div class = "layer">
-                        <h3>Home Work helper </h3>
-                        <p>This app will guide you to make a perfect homework design and will allow you to do it.</p>
-                        <a href="#"><i class="fa-solid fa-briefcase"></i></a>
+                <div class="skills">
+                    <h3>Technical Skills</h3>
+                    <div class="skills-grid">
+                        <div class="skill-category">
+                            <h4>Programming</h4>
+                            <ul>
+                                <li>Python</li>
+                                <li>Java</li>
+                                <li>JavaScript</li>
+                                <li>HTML/CSS</li>
+                            </ul>
+                        </div>
+                        <div class="skill-category">
+                            <h4>Frameworks & Tools</h4>
+                            <ul>
+                                <li>React</li>
+                                <li>Node.js</li>
+                                <li>Git/GitHub</li>
+                                <li>SPSS</li>
+                            </ul>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
+    </section>
 
-    <!--------------------------------Contact------------------------------------------->
-      <div id="contact">
+    <!-- Projects Section -->
+    <section id="projects" class="projects">
         <div class="container">
-            <div class="row">
-                <div class="contact-left">
-                    <h1 class ="sub-title">Contact Me</h1>
-                    <p> kushalbahttarai1908@gmail.com</p>
-                    <p>3186051286</p>
-                    <div class="social-icons">
-                        <a href=""><i class="fa-brands fa-facebook"></i></a>
-                        <a href=""><i class="fa-brands fa-linkedin"></i></a>
-                        <a href=""><i class="fa-brands fa-instagram"></i></a>
+            <h2 class="section-title">Featured Projects</h2>
+            <div class="projects-grid">
+                <div class="project-card">
+                    <div class="project-image">
+                        <img src="assets/project1.jpg" alt="Real Time Dashboard">
                     </div>
-
+                    <div class="project-content">
+                        <h3>Real Time Dashboard</h3>
+                        <p>A comprehensive dashboard for stock transaction tracking with improved data visualization and customer support.</p>
+                        <div class="tech-stack">
+                            <span>React</span>
+                            <span>Chakra UI</span>
+                            <span>Real-time Data</span>
+                        </div>
+                        <div class="project-achievements">
+                            <ul>
+                                <li>Improved stock tracking by 40%</li>
+                                <li>Reduced customer queries by 25%</li>
+                                <li>Achieved 99.9% uptime</li>
+                            </ul>
+                        </div>
+                        <a href="#" class="project-link">View Project →</a>
+                    </div>
                 </div>
-                <div class="contact-right">
-                    <form>
-                        <input type="text" name="Name" placeholder="Your Name" required>
-                        <input type="text" name="Email" placeholder="Your Email" required>
-                        <textarea type="Message" rows="6" placeholder="Your Message"></textarea>
-                        <button type="submit"> Submit</button>
-
-                    </form>
-
+                <div class="project-card">
+                    <div class="project-image">
+                        <img src="assets/project2.jpg" alt="Time Wizard">
+                    </div>
+                    <div class="project-content">
+                        <h3>Time Wizard</h3>
+                        <p>Python-based application for calculating time differences using OOP principles.</p>
+                        <div class="tech-stack">
+                            <span>Python</span>
+                            <span>OOP</span>
+                        </div>
+                        <div class="project-achievements">
+                            <ul>
+                                <li>Reduced system crashes by 60%</li>
+                                <li>Implemented robust error handling</li>
+                            </ul>
+                        </div>
+                        <a href="#" class="project-link">View Project →</a>
+                    </div>
                 </div>
             </div>
         </div>
-      </div>
+    </section>
 
+    <!-- Contact Section -->
+    <section id="contact" class="contact">
+        <div class="container">
+            <h2 class="section-title">Get in Touch</h2>
+            <div class="contact-content">
+                <div class="contact-info">
+                    <div class="contact-item">
+                        <i class="fas fa-envelope"></i>
+                        <div>
+                            <h3>Email</h3>
+                            <a href="mailto:bhattaraiku@warhawks.ulm.edu">bhattaraiku@warhawks.ulm.edu</a>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fas fa-phone"></i>
+                        <div>
+                            <h3>Phone</h3>
+                            <a href="tel:+13186051286">(+1) 318-605-1286</a>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <div>
+                            <h3>Location</h3>
+                            <p>Monroe, LA</p>
+                        </div>
+                    </div>
+                </div>
+                <form class="contact-form">
+                    <div class="form-group">
+                        <label for="name">Name</label>
+                        <input type="text" id="name" name="name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email</label>
+                        <input type="email" id="email" name="email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="message">Message</label>
+                        <textarea id="message" name="message" required></textarea>
+                    </div>
+                    <button type="submit" class="btn primary-btn">Send Message</button>
+                </form>
+                <div class="social-links">
+                    <a href="https://www.linkedin.com/in/kushalbhattarai1908" target="_blank" rel="noopener noreferrer" class="social-link">
+                        <i class="fab fa-linkedin"></i>
+                    </a>
+                    <a href="https://github.com/kushalbtt" target="_blank" rel="noopener noreferrer" class="social-link">
+                        <i class="fab fa-github"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2024 Kushal Bhattarai. All rights reserved.</p>
+        </div>
+    </footer>
 
     <script>
-        var tablinks = document.getElementsByClassName("tab-links")
-        var tabcontents = document.getElementsByClassName("tab-contents");
+        // Mobile Menu Toggle
+        const menuToggle = document.querySelector('.menu-toggle');
+        const navLinks = document.querySelector('.nav-links');
+        
+        menuToggle.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+        });
 
-        function opentab(tabname){
-            for(tablink of tablinks){
-                tablink.classList.remove("active-link");
-            }
-            for(tabcontent of tabcontents){
-                tabcontent.classList.remove("active-tab");
-            }
-
-            event.currentTarget.classList.add("active-link");
-
-            
-            document.getElementById(tabname).classList.add("active-tab");
-           
-        }
+        // Smooth Scrolling
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
     </script>
 </body>
 </html>
