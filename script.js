@@ -1,17 +1,36 @@
 let pageTransitionOverlay = null;
+const APP_VERSION = "20260508-2";
+
+function getTemplateMarkup(sectionId) {
+    const template = document.getElementById(`${sectionId}-template`);
+    return template ? template.innerHTML.trim() : '';
+}
 
 // Load section content
 async function loadSection(sectionId) {
-    try {
-        const response = await fetch(`${sectionId}.html`);
-        const sectionElement = document.getElementById(`${sectionId}-section`);
-        if (!sectionElement) {
-            console.error(`Section element not found: ${sectionId}-section`);
-            return false;
-        }
+    const sectionElement = document.getElementById(`${sectionId}-section`);
+    const fallbackMarkup = getTemplateMarkup(sectionId);
 
+    if (!sectionElement) {
+        console.error(`Section element not found: ${sectionId}-section`);
+        return false;
+    }
+
+    if (window.location.protocol === 'file:' && fallbackMarkup) {
+        sectionElement.innerHTML = fallbackMarkup;
+        console.log(`Loaded section from template: ${sectionId}`);
+        return true;
+    }
+
+    try {
+        const response = await fetch(`${sectionId}.html?v=${APP_VERSION}`);
         if (!response.ok) {
             console.error(`Failed to load ${sectionId}: ${response.status} ${response.statusText}`);
+            if (fallbackMarkup) {
+                sectionElement.innerHTML = fallbackMarkup;
+                console.log(`Loaded section from template after fetch failure: ${sectionId}`);
+                return true;
+            }
             sectionElement.innerHTML = `<div class="load-error">Failed to load <strong>${sectionId}</strong>. Try serving the site using a local server (e.g. <code>python3 -m http.server</code>) and open <code>http://localhost:8000</code>.</div>`;
             return false;
         }
@@ -22,7 +41,11 @@ async function loadSection(sectionId) {
         return true;
     } catch (error) {
         console.error(`Error loading ${sectionId}:`, error);
-        const sectionElement = document.getElementById(`${sectionId}-section`);
+        if (fallbackMarkup) {
+            sectionElement.innerHTML = fallbackMarkup;
+            console.log(`Loaded section from template after error: ${sectionId}`);
+            return true;
+        }
         if (sectionElement) {
             sectionElement.innerHTML = `<div class="load-error">Error loading <strong>${sectionId}</strong>. Check the browser console. If you're opening this file directly (file://), serve the folder with a local HTTP server.</div>`;
         }

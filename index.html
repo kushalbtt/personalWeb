@@ -4,8 +4,16 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Kushal Bhattarai - Personal Portfolio</title>
-    <link rel="stylesheet" href="styles.css">
+    <script>
+        if (window.location.protocol === 'file:') {
+            window.location.replace('http://localhost:8000/index.html' + window.location.hash);
+        }
+    </script>
+    <link rel="stylesheet" href="styles.css?v=20260508-2">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
     <!-- Inline SVG favicon to avoid 404 when favicon.ico is missing -->
     <link rel="icon" href="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' fill='%233498db'/><text x='50' y='72' font-size='56' text-anchor='middle' fill='white' font-family='Arial' font-weight='700'>K</text></svg>">
 </head>
@@ -20,7 +28,7 @@
 
     <header>
         <nav class="navbar">
-            <div class="nav-brand">Kushal</div>
+            <a href="#home" class="nav-brand scroll-link" data-section="home">Kushal</a>
             <ul class="nav-links">
                 <li><a href="#home" data-section="home">Home</a></li>
                 <li><a href="#about" data-section="about">About</a></li>
@@ -39,10 +47,358 @@
         <div id="contact-section"></div>
     </main>
 
+    <template id="home-template">
+        <section id="home" class="section hero-section">
+            <div class="section-container hero-grid">
+                <div class="hero-content">
+                    <div class="profile-photo">
+                        <img src="webPhtoto.jpg" alt="Kushal Bhattarai">
+                    </div>
+
+                    <h1>Hi, I'm <span class="highlight">Kushal Bhattarai</span></h1>
+                    <p class="subtitle">Computer Science honors student building full-stack, AI-assisted, and data-driven systems across web, cloud, and real-time computer vision.</p>
+                    <ul class="hero-summary">
+                        <li>Full-stack development with React, Next.js, Node.js, Express, and MongoDB</li>
+                        <li>Python systems using OpenCV, MediaPipe, NumPy, and Scikit-learn</li>
+                        <li>Cloud and tooling experience across AWS, Google Cloud, Firebase, Docker, and GitHub</li>
+                    </ul>
+                    <div class="cta-buttons">
+                        <a href="#projects" class="btn primary scroll-link">Explore Work</a>
+                        <a href="#contact" class="btn secondary scroll-link">Let's Collaborate</a>
+                        <a href="Main_Resume.pdf" class="btn ghost" target="_blank">Download Resume</a>
+                    </div>
+                </div>
+
+                <div class="hero-highlights">
+                    <div class="highlight-card">
+                        <span class="highlight-label">GPA</span>
+                        <span class="highlight-value">3.94 / 4.0</span>
+                        <p>BS Computer Science (Honors)<br>University of Louisiana Monroe<br>Expected Graduation: May 2027</p>
+                    </div>
+                    <div class="highlight-card">
+                        <span class="highlight-label">Experience</span>
+                        <span class="highlight-value">75+ Sites</span>
+                        <ul class="experience-list">
+                            <li>Web Developer Intern</li>
+                            <li>Teaching Assistant</li>
+                            <li>Full-Stack Developer</li>
+                            <li>Data Analyst</li>
+                            <li>Java Programmer</li>
+                        </ul>
+                    </div>
+                    <div class="highlight-card">
+                        <span class="highlight-label">Certifications</span>
+                        <span class="highlight-value">AWS + Cyber</span>
+                        <ul class="recognition-list">
+                            <li><a href="https://www.credly.com/earner/earned/badge/989cdeb9-96f6-4802-bf55-e345482edc45" target="_blank" rel="noopener noreferrer">AWS Certified Cloud Practitioner</a></li>
+                            <li><a href="https://www.credly.com/earner/earned/badge/111478df-c2d5-4130-af94-b96a597aead9" target="_blank" rel="noopener noreferrer">AWS Certified AI Practitioner</a></li>
+                            <li><a href="https://www.credly.com/earner/earned/badge/4a199f4e-a4e7-4fe5-85a7-78533d175b85" target="_blank" rel="noopener noreferrer">Ethical Hacking Essentials (EHE)</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </template>
+
+    <template id="about-template">
+        <section id="about" class="section aurora-section">
+            <div class="section-header">
+                <p class="eyebrow">Who I Am</p>
+                <h2>Building practical software across web, AI, data, cloud, and security.</h2>
+                <p>I’m a BS Computer Science (Honors) student at the University of Louisiana Monroe, expected to graduate in May 2027. My work spans production website support, Java teaching assistance, real-time computer vision, full-stack applications, and data analysis.</p>
+            </div>
+
+            <div class="about-showcase">
+                <div class="bio-panel glass-card">
+                    <div class="bio-header">
+                        <div>
+                            <p class="mini-label">Currently</p>
+                            <h3>Computer Science Honors Student</h3>
+                        </div>
+                        <span class="status-pill">Open to SWE internships</span>
+                    </div>
+                    <p class="bio-body">I focus on software that is useful under real constraints: fast client website updates, reliable full-stack systems, accessible AI tools, and analysis pipelines that turn raw data into decisions.</p>
+                    <div class="bio-metrics">
+                        <div>
+                            <span class="metric-value">3.94</span>
+                            <span class="metric-label">GPA (Honors)</span>
+                        </div>
+                        <div>
+                            <span class="metric-value">75+</span>
+                            <span class="metric-label">Client sites supported</span>
+                        </div>
+                        <div>
+                            <span class="metric-value">50+</span>
+                            <span class="metric-label">Student projects reviewed</span>
+                        </div>
+                    </div>
+                    <ul class="bio-highlights">
+                        <li><i class="fas fa-code"></i>Full-stack development with React, Next.js, Node.js, Express, and modern JavaScript.</li>
+                        <li><i class="fas fa-brain"></i>AI and computer vision projects using Python, OpenCV, MediaPipe, NumPy, and Scikit-learn.</li>
+                        <li><i class="fas fa-cloud"></i>Cloud and database work across AWS, Google Cloud, Firebase, Supabase, MySQL, MongoDB, and Redis.</li>
+                    </ul>
+                </div>
+
+                <div class="focus-grid">
+                    <div class="focus-card">
+                        <h4><i class="fas fa-layer-group"></i> Languages</h4>
+                        <div class="chip-grid">
+                            <span class="chip">Python</span>
+                            <span class="chip">Java</span>
+                            <span class="chip">C</span>
+                            <span class="chip">C++</span>
+                            <span class="chip">JavaScript</span>
+                            <span class="chip">TypeScript</span>
+                            <span class="chip">SQL</span>
+                            <span class="chip">HTML/CSS</span>
+                        </div>
+                    </div>
+                    <div class="focus-card">
+                        <h4><i class="fas fa-code-branch"></i> Frameworks</h4>
+                        <div class="chip-grid">
+                            <span class="chip">React</span>
+                            <span class="chip">Next.js</span>
+                            <span class="chip">Node.js</span>
+                            <span class="chip">Express.js</span>
+                            <span class="chip">Tailwind CSS</span>
+                            <span class="chip">Java Swing</span>
+                        </div>
+                    </div>
+                    <div class="focus-card">
+                        <h4><i class="fas fa-database"></i> Data & Cloud</h4>
+                        <div class="chip-grid">
+                            <span class="chip">MySQL</span>
+                            <span class="chip">MongoDB</span>
+                            <span class="chip">Redis</span>
+                            <span class="chip">AWS EC2/S3</span>
+                            <span class="chip">Google Cloud</span>
+                            <span class="chip">Firebase</span>
+                            <span class="chip">Supabase</span>
+                        </div>
+                    </div>
+                    <div class="focus-card">
+                        <h4><i class="fas fa-certificate"></i> Certifications</h4>
+                        <div class="chip-grid">
+                            <a class="chip" href="https://www.credly.com/earner/earned/badge/4a199f4e-a4e7-4fe5-85a7-78533d175b85" target="_blank" rel="noopener noreferrer">IT Support</a>
+                            <a class="chip" href="https://www.credly.com/earner/earned/badge/3141a8e9-5512-46ab-b911-3bb0cad1c627" target="_blank" rel="noopener noreferrer">Intro to Networks</a>
+                            <a class="chip" href="https://www.credly.com/earner/earned/badge/43bddac0-85ad-4fb6-9ca8-fe41a2a1a407" target="_blank" rel="noopener noreferrer">AWS Academy Graduate - Cloud</a>
+                            <a class="chip" href="https://www.credly.com/earner/earned/badge/111478df-c2d5-4130-af94-b96a597aead9" target="_blank" rel="noopener noreferrer">AWS Certified AI Practitioner</a>
+                            <a class="chip" href="https://www.credly.com/earner/earned/badge/111478df-c2d5-4130-af94-b96a597aead9" target="_blank" rel="noopener noreferrer">AWS Cloud AI Practitioner</a>
+                            <span class="chip">Google Cybersecurity</span>
+                            <span class="chip">Cisco Networking Basics</span>
+                            <span class="chip">Cisco Packet Tracer</span>
+                            <span class="chip">EC-Council EHE</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </template>
+
+    <template id="experience-template">
+        <section id="experience" class="section night-grid">
+            <div class="section-header">
+                <p class="eyebrow">Experience</p>
+                <h2>Professional experience in web development, teaching, and software delivery.</h2>
+                <p>My recent work includes supporting a large client website portfolio and helping students strengthen Java, debugging, and problem-solving skills.</p>
+            </div>
+
+            <div class="experience-showcase">
+                <div class="timeline neon-timeline">
+                    <article class="timeline-item">
+                        <div class="timeline-marker"><span>Jan 2026 - Apr 2026</span></div>
+                        <div class="timeline-card">
+                            <h3>Web Developer Intern</h3>
+                            <p class="company">Key Marketing Solutions • Monroe, LA</p>
+                            <ul class="achievements">
+                                <li><i class="fas fa-code"></i>Managed and supported a portfolio of 75+ client websites through content updates, layout enhancements, and performance improvements.</li>
+                                <li><i class="fas fa-globe"></i>Developed and launched client websites aligned with business goals while maintaining domains, hosting, and technical configurations for 99.9% uptime.</li>
+                            </ul>
+                        </div>
+                    </article>
+                    <article class="timeline-item">
+                        <div class="timeline-marker"><span>Aug 2025 - Dec 2025</span></div>
+                        <div class="timeline-card">
+                            <h3>Teaching Assistant</h3>
+                            <p class="company">University of Louisiana Monroe</p>
+                            <ul class="achievements">
+                                <li><i class="fas fa-chalkboard-teacher"></i>Supported programming instruction and labs for 35 students, reinforcing Java concepts and coding skills.</li>
+                                <li><i class="fas fa-lightbulb"></i>Reviewed and evaluated 50+ student projects with actionable feedback and exam preparation support.</li>
+                            </ul>
+                        </div>
+                    </article>
+                </div>
+
+                <aside class="experience-side">
+                    <div class="badge-card">
+                        <p class="mini-label">Education</p>
+                        <ul>
+                            <li><i class="fas fa-graduation-cap"></i>BS Computer Science (Honors), ULM</li>
+                            <li><i class="fas fa-calendar"></i>Expected Graduation: May 2027</li>
+                            <li><i class="fas fa-star"></i>GPA: 3.94 / 4.0</li>
+                        </ul>
+                    </div>
+                    <div class="badge-card">
+                        <p class="mini-label">Toolbox</p>
+                        <div class="pill-stack">
+                            <span>React</span><span>Next.js</span><span>Node.js</span><span>Express</span><span>MongoDB</span><span>Python</span><span>AWS</span><span>Docker</span>
+                        </div>
+                    </div>
+                </aside>
+            </div>
+        </section>
+    </template>
+
+    <template id="projects-template">
+        <section id="projects" class="section starlight">
+            <div class="section-header">
+                <p class="eyebrow">Projects & Case Studies</p>
+                <h2>Full-stack, AI, computer vision, data, and simulation projects.</h2>
+                <p>These projects reflect the current resume: real-time sign recognition, injury prevention analytics, e-commerce data analysis, and Java simulation tooling.</p>
+            </div>
+
+            <div class="project-showcase">
+                <article class="project-panel gradient-card">
+                    <div class="panel-top">
+                        <span class="project-label">Computer Vision • Accessibility</span>
+                        <h3>HoloHand</h3>
+                        <p>Real-time sign language detection using Python, OpenCV, MediaPipe, C#, WebSockets, JSON, and NumPy.</p>
+                    </div>
+                    <ul>
+                        <li><i class="fas fa-hand-paper"></i>Captures and interprets 21 hand landmarks to recognize basic signs and gestures.</li>
+                        <li><i class="fas fa-project-diagram"></i>Converts hand shapes, finger positions, and palm orientation into classifiable sign patterns.</li>
+                        <li><i class="fas fa-tachometer-alt"></i>Uses multithreading and headless execution for smooth 30-60 FPS recognition with low delay.</li>
+                    </ul>
+                    <div class="panel-meta">
+                        <span>Python</span><span>OpenCV</span><span>MediaPipe</span><span>WebSockets</span>
+                    </div>
+                </article>
+
+                <article class="project-panel gradient-card">
+                    <div class="panel-top">
+                        <span class="project-label">AI • Healthtech</span>
+                        <h3>ACL Injury Prevention and Recovery System</h3>
+                        <p>AI-assisted movement tracking for knee motion analysis, wearable data, and recovery workflows.</p>
+                    </div>
+                    <ul>
+                        <li><i class="fas fa-running"></i>Developed a Python movement-tracking pipeline to capture joint trajectories and abnormal knee rotation patterns.</li>
+                        <li><i class="fas fa-network-wired"></i>Built a React, Node.js, and MongoDB app with real-time analytics, wearable integration, and secure authentication.</li>
+                        <li><i class="fas fa-users"></i>Connected athletes, trainers, and clinicians in one system for prevention and recovery support.</li>
+                    </ul>
+                    <div class="panel-meta">
+                        <span>Python</span><span>React</span><span>Node.js</span><span>MongoDB</span>
+                    </div>
+                </article>
+
+                <article class="project-panel glass-card">
+                    <div class="panel-top">
+                        <span class="project-label">Analytics • Automation</span>
+                        <h3>E-commerce Data Analysis</h3>
+                        <p>Automated analysis for 10,000+ e-commerce transaction records collected from various U.S. states.</p>
+                    </div>
+                    <ul>
+                        <li><i class="fas fa-database"></i>Cleaned and analyzed transaction data using Python and MongoDB.</li>
+                        <li><i class="fas fa-chart-line"></i>Produced trend charts, demand patterns, and customer behavior insights while reducing manual analysis time by 35%.</li>
+                        <li><i class="fas fa-lightbulb"></i>Identified top-performing states and products, improving decision-making clarity by 20%.</li>
+                    </ul>
+                    <div class="panel-meta">
+                        <span>Python</span><span>MongoDB</span><span>Data Analysis</span>
+                    </div>
+                </article>
+
+                <article class="project-panel glass-card">
+                    <div class="panel-top">
+                        <span class="project-label">Simulation • Java</span>
+                        <h3>RoboStack</h3>
+                        <p>Java simulation environment with real-time visualization and efficient command-based operations.</p>
+                    </div>
+                    <ul>
+                        <li><i class="fas fa-robot"></i>Integrated a real-time visualization interface that reduced development time by roughly 20 hours weekly.</li>
+                        <li><i class="fas fa-terminal"></i>Implemented command-based robot operations that improved retrieval efficiency by 35%.</li>
+                        <li><i class="fas fa-layer-group"></i>Designed an O(1) stack representation to track and display system states without interface lag.</li>
+                    </ul>
+                    <div class="panel-meta">
+                        <span>Java</span><span>Data Structures</span><span>Simulation</span>
+                    </div>
+                </article>
+            </div>
+        </section>
+    </template>
+
+    <template id="contact-template">
+        <section id="contact" class="section contact-nebula">
+            <div class="section-header">
+                <p class="eyebrow">Connect</p>
+                <h2>Let’s collaborate on research, internships, or freelance builds.</h2>
+                <p>Give me a little context and I’ll respond with availability within 24 hours.</p>
+            </div>
+
+            <div class="contact-hub">
+                <div class="contact-card">
+                    <h3>Contact Info </h3>
+                    <p>Monroe, LA • Remote-friendly</p>
+                    <div class="contact-details">
+                        <div>
+                            <span class="label">Primary Email</span>
+                            <a href="mailto:kushalbhattarai1908@gmail.com">kushalbhattarai1908@gmail.com</a>
+                        </div>
+                        <div>
+                            <span class="label">University Email</span>
+                            <a href="mailto:bhattaraiku@warhawks.ulm.edu">bhattaraiku@warhawks.ulm.edu</a>
+                        </div>
+                        <div>
+                            <span class="label">Phone</span>
+                            <a href="tel:+13186501286">+1 (318) 605 1286</a>
+                        </div>
+                    </div>
+                    <div class="contact-links">
+                        <a href="https://github.com/bhattaraiku" target="_blank"><i class="fab fa-github"></i></a>
+                        <a href="https://www.linkedin.com/in/bhattaraiku/" target="_blank"><i class="fab fa-linkedin"></i></a>
+                        <a href="Main_Resume.pdf" target="_blank"><i class="fas fa-file-download"></i></a>
+                    </div>
+                </div>
+
+                <form id="contactForm" class="contact-form" action="https://formspree.io/f/mlggrnbl" method="POST">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="name">Full Name</label>
+                            <input type="text" id="name" name="name" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Email</label>
+                            <input type="email" id="email" name="email" required>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="subject">Subject</label>
+                            <input type="text" id="subject" name="subject" placeholder="Project inquiry, mentoring, etc.">
+                        </div>
+                        <div class="form-group">
+                            <label for="timeline">Ideal timeline</label>
+                            <input type="text" id="timeline" name="timeline" placeholder="2 weeks, ASAP, flexible">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="message">Message</label>
+                        <textarea id="message" name="message" rows="5" required></textarea>
+                    </div>
+                    <input type="text" name="_gotcha" style="display:none" tabindex="-1" aria-hidden="true">
+                    <button type="submit" id="submitBtn" class="btn primary">
+                        <span class="btn-text">Send Message</span>
+                        <i class="fas fa-paper-plane"></i>
+                    </button>
+                    <div id="formStatus"></div>
+                </form>
+            </div>
+        </section>
+    </template>
+
     <footer>
         <p>&copy; 2024 Kushal Bhattarai. All rights reserved.</p>
     </footer>
 
-    <script src="script.js"></script>
+    <script src="galaxy-background.js?v=20260508-2"></script>
+    <script src="script.js?v=20260508-2"></script>
 </body>
 </html> 
