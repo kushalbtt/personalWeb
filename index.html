@@ -4,37 +4,22 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Kushal Bhattarai - Personal Portfolio</title>
-    <script>
-        if (window.location.protocol === 'file:') {
-            window.location.replace('http://localhost:8000/index.html' + window.location.hash);
-        }
-    </script>
-    <link rel="stylesheet" href="styles.css?v=20260508-2">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <meta name="description" content="Kushal Bhattarai is a computer science honors student building full-stack, AI-assisted, cloud, data, and computer vision software projects.">
+    <meta name="author" content="Kushal Bhattarai">
+    <meta property="og:title" content="Kushal Bhattarai - Personal Portfolio">
+    <meta property="og:description" content="Computer science honors student focused on full-stack development, AI, data, cloud, and real-time computer vision.">
+    <meta property="og:type" content="website">
+    <meta property="og:image" content="webPhtoto-optimized.jpg">
+    <meta name="twitter:card" content="summary_large_image">
+    <link rel="stylesheet" href="styles.css?v=20260528-1">
+    <link rel="preload" as="image" href="webPhtoto-optimized.jpg" fetchpriority="high">
     <!-- Inline SVG favicon to avoid 404 when favicon.ico is missing -->
     <link rel="icon" href="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' fill='%233498db'/><text x='50' y='72' font-size='56' text-anchor='middle' fill='white' font-family='Arial' font-weight='700'>K</text></svg>">
-
-        <!-- Google tag (gtag.js) -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-PTND45BEX7"></script>
-    <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
-
-      gtag('config', 'G-PTND45BEX7');
-    </script>
-
-
 </head>
 <body>
     <!-- Video Background -->
     <div class="video-background">
-        <video autoplay muted loop playsinline>
-            <source src="backGround.mp4" type="video/mp4">
-        </video>
+        <video muted loop playsinline preload="none" data-src="backGround.mp4"></video>
     </div>
     <div class="video-overlay"></div>
 
@@ -52,7 +37,59 @@
     </header>
 
     <main>
-        <div id="home-section"></div>
+        <div id="home-section">
+            <section id="home" class="section hero-section">
+                <div class="section-container hero-grid">
+                    <div class="hero-content">
+                        <div class="profile-photo">
+                            <img src="webPhtoto-optimized.jpg" alt="Kushal Bhattarai" width="390" height="520" fetchpriority="high" decoding="async">
+                        </div>
+
+                        <h1>Hi, I'm <span class="highlight">Kushal Bhattarai</span></h1>
+                        <p class="subtitle">Computer Science honors student building full-stack, AI-assisted, and data-driven systems across web, cloud, and real-time computer vision.</p>
+                        <ul class="hero-summary">
+                            <li>Full-stack development with React, Next.js, Node.js, Express, and MongoDB</li>
+                            <li>Python systems using OpenCV, MediaPipe, NumPy, and Scikit-learn</li>
+                            <li>Cloud and tooling experience across AWS, Google Cloud, Firebase, Docker, and GitHub</li>
+                        </ul>
+                        <div class="cta-buttons">
+                            <a href="#projects" class="btn primary scroll-link">Explore Work</a>
+                            <a href="#contact" class="btn secondary scroll-link">Let's Collaborate</a>
+                            <a href="Main_Resume.pdf" class="btn ghost" target="_blank">Download Resume</a>
+                        </div>
+                    </div>
+
+                    <div class="hero-highlights">
+                        <div class="highlight-card">
+                            <span class="highlight-label">GPA</span>
+                            <span class="highlight-value">3.94 / 4.0</span>
+                            <p>BS Computer Science (Honors)<br>University of Louisiana Monroe<br>Expected Graduation: May 2027</p>
+                        </div>
+                        <div class="highlight-card">
+                            <span class="highlight-label">Experience</span>
+                            <span class="highlight-value">75+ Sites</span>
+                            <ul class="experience-list">
+                                <li>Web Developer Intern</li>
+                                <li>Research Assistant</li>
+                                <li>Teaching Assistant</li>
+                                <li>Full-Stack Developer</li>
+                                <li>Data Analyst</li>
+                                <li>Java Programmer</li>
+                            </ul>
+                        </div>
+                        <div class="highlight-card">
+                            <span class="highlight-label">Certifications</span>
+                            <span class="highlight-value">AWS + Cyber</span>
+                            <ul class="recognition-list">
+                                <li><a href="https://www.credly.com/earner/earned/badge/989cdeb9-96f6-4802-bf55-e345482edc45" target="_blank" rel="noopener noreferrer">AWS Certified Cloud Practitioner</a></li>
+                                <li><a href="https://www.credly.com/earner/earned/badge/111478df-c2d5-4130-af94-b96a597aead9" target="_blank" rel="noopener noreferrer">AWS Certified AI Practitioner</a></li>
+                                <li><a href="https://www.credly.com/earner/earned/badge/4a199f4e-a4e7-4fe5-85a7-78533d175b85" target="_blank" rel="noopener noreferrer">Ethical Hacking Essentials (EHE)</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
         <div id="about-section"></div>
         <div id="experience-section"></div>
         <div id="projects-section"></div>
@@ -64,7 +101,7 @@
             <div class="section-container hero-grid">
                 <div class="hero-content">
                     <div class="profile-photo">
-                        <img src="webPhtoto.jpg" alt="Kushal Bhattarai">
+                        <img src="webPhtoto-optimized.jpg" alt="Kushal Bhattarai" width="390" height="520" loading="lazy" decoding="async">
                     </div>
 
                     <h1>Hi, I'm <span class="highlight">Kushal Bhattarai</span></h1>
@@ -376,9 +413,9 @@
                         </div>
                     </div>
                     <div class="contact-links">
-                        <a href="https://github.com/bhattaraiku" target="_blank"><i class="fab fa-github"></i></a>
-                        <a href="https://www.linkedin.com/in/bhattaraiku/" target="_blank"><i class="fab fa-linkedin"></i></a>
-                        <a href="Main_Resume.pdf" target="_blank"><i class="fas fa-file-download"></i></a>
+                        <a href="https://github.com/bhattaraiku" target="_blank">GitHub</a>
+                        <a href="https://www.linkedin.com/in/bhattaraiku/" target="_blank">LinkedIn</a>
+                        <a href="Main_Resume.pdf" target="_blank">Resume</a>
                     </div>
                 </div>
 
@@ -410,7 +447,6 @@
                     <input type="text" name="_gotcha" style="display:none" tabindex="-1" aria-hidden="true">
                     <button type="submit" id="submitBtn" class="btn primary">
                         <span class="btn-text">Send Message</span>
-                        <i class="fas fa-paper-plane"></i>
                     </button>
                     <div id="formStatus"></div>
                 </form>
@@ -422,7 +458,6 @@
         <p>&copy; 2024 Kushal Bhattarai. All rights reserved.</p>
     </footer>
 
-    <script src="galaxy-background.js?v=20260508-2"></script>
-    <script src="script.js?v=20260508-2"></script>
+    <script src="script.js?v=20260528-1" defer></script>
 </body>
 </html> 

@@ -1,56 +1,29 @@
-let pageTransitionOverlay = null;
-const APP_VERSION = "20260508-2";
-
 function getTemplateMarkup(sectionId) {
     const template = document.getElementById(`${sectionId}-template`);
     return template ? template.innerHTML.trim() : '';
 }
 
 // Load section content
-async function loadSection(sectionId) {
+function loadSection(sectionId) {
     const sectionElement = document.getElementById(`${sectionId}-section`);
-    const fallbackMarkup = getTemplateMarkup(sectionId);
 
     if (!sectionElement) {
         console.error(`Section element not found: ${sectionId}-section`);
         return false;
     }
 
-    if (window.location.protocol === 'file:' && fallbackMarkup) {
-        sectionElement.innerHTML = fallbackMarkup;
-        console.log(`Loaded section from template: ${sectionId}`);
+    if (sectionElement.innerHTML.trim()) {
         return true;
     }
 
-    try {
-        const response = await fetch(`${sectionId}.html?v=${APP_VERSION}`);
-        if (!response.ok) {
-            console.error(`Failed to load ${sectionId}: ${response.status} ${response.statusText}`);
-            if (fallbackMarkup) {
-                sectionElement.innerHTML = fallbackMarkup;
-                console.log(`Loaded section from template after fetch failure: ${sectionId}`);
-                return true;
-            }
-            sectionElement.innerHTML = `<div class="load-error">Failed to load <strong>${sectionId}</strong>. Try serving the site using a local server (e.g. <code>python3 -m http.server</code>) and open <code>http://localhost:8000</code>.</div>`;
-            return false;
-        }
-
-        const content = await response.text();
-        sectionElement.innerHTML = content;
-        console.log(`Loaded section: ${sectionId}`);
+    const templateMarkup = getTemplateMarkup(sectionId);
+    if (templateMarkup) {
+        sectionElement.innerHTML = templateMarkup;
         return true;
-    } catch (error) {
-        console.error(`Error loading ${sectionId}:`, error);
-        if (fallbackMarkup) {
-            sectionElement.innerHTML = fallbackMarkup;
-            console.log(`Loaded section from template after error: ${sectionId}`);
-            return true;
-        }
-        if (sectionElement) {
-            sectionElement.innerHTML = `<div class="load-error">Error loading <strong>${sectionId}</strong>. Check the browser console. If you're opening this file directly (file://), serve the folder with a local HTTP server.</div>`;
-        }
-        return false;
     }
+
+    sectionElement.innerHTML = `<div class="load-error">Failed to load <strong>${sectionId}</strong>.</div>`;
+    return false;
 }
 
 function getNavbarHeight() {
@@ -58,7 +31,7 @@ function getNavbarHeight() {
     return navbar ? navbar.offsetHeight : 0;
 }
 
-async function ensureSectionReady(sectionId) {
+function ensureSectionReady(sectionId) {
     const sectionElement = document.getElementById(`${sectionId}-section`);
     if (!sectionElement) {
         console.error(`Section container missing for ${sectionId}`);
@@ -66,7 +39,7 @@ async function ensureSectionReady(sectionId) {
     }
 
     if (!sectionElement.innerHTML.trim()) {
-        const loaded = await loadSection(sectionId);
+        const loaded = loadSection(sectionId);
         if (!loaded) return null;
     }
 
@@ -79,58 +52,34 @@ async function ensureSectionReady(sectionId) {
     return targetSection;
 }
 
-async function runWithPageTransition(sectionId, task) {
-    if (!pageTransitionOverlay) {
-        await task();
-        return;
-    }
-
-    return new Promise(resolve => {
-        pageTransitionOverlay.setAttribute('data-target', sectionId || '');
-        pageTransitionOverlay.classList.add('active');
-        setTimeout(async () => {
-            await task();
-            setTimeout(() => {
-                pageTransitionOverlay.classList.remove('active');
-                resolve();
-            }, 400);
-        }, 200);
-    });
-}
-
-async function navigateToSection(sectionId) {
+function navigateToSection(sectionId) {
     if (!sectionId) return;
-    await runWithPageTransition(sectionId, async () => {
-        const targetSection = await ensureSectionReady(sectionId);
-        if (!targetSection) return;
-        const targetOffset = targetSection.offsetTop - getNavbarHeight();
-        window.scrollTo({
-            top: targetOffset,
-            behavior: 'smooth'
-        });
-        history.replaceState(null, '', `#${sectionId}`);
+    const targetSection = ensureSectionReady(sectionId);
+    if (!targetSection) return;
+    const targetOffset = targetSection.offsetTop - getNavbarHeight();
+    window.scrollTo({
+        top: targetOffset,
+        behavior: 'smooth'
     });
+    history.replaceState(null, '', `#${sectionId}`);
 }
 
 // Handle smooth scrolling
-async function handleScrollLink(e) {
+function handleScrollLink(e) {
     e.preventDefault();
     const targetId = this.getAttribute('href');
     if (!targetId || !targetId.startsWith('#')) return;
     const sectionId = targetId.substring(1);
-    await navigateToSection(sectionId);
+    navigateToSection(sectionId);
 }
 
 // Add event listeners to scroll links
 function addScrollLinkListeners() {
     const scrollLinks = document.querySelectorAll('.scroll-link');
-    console.log('Adding listeners to scroll links:', scrollLinks.length);
     
     scrollLinks.forEach(link => {
-        // Remove any existing listeners to prevent duplicates
         link.removeEventListener('click', handleScrollLink);
         link.addEventListener('click', handleScrollLink);
-        console.log('Added click listener to:', link.getAttribute('href'));
     });
 }
 
@@ -147,7 +96,7 @@ function initializeContactForm() {
         const formData = new FormData(form);
 
         submitBtn.disabled = true;
-        submitBtn.innerHTML = `<i class="fas fa-spinner fa-spin"></i> Sending...`;
+        submitBtn.textContent = 'Sending...';
 
         fetch(form.action, {
             method: 'POST',
@@ -171,7 +120,7 @@ function initializeContactForm() {
             formStatus.style.display = 'block';
         }).finally(() => {
             submitBtn.disabled = false;
-            submitBtn.innerHTML = `<span class="btn-text">Send Message</span><i class="fas fa-paper-plane"></i>`;
+            submitBtn.innerHTML = `<span class="btn-text">Send Message</span>`;
             setTimeout(() => {
                 formStatus.style.display = 'none';
             }, 4000);
@@ -179,14 +128,44 @@ function initializeContactForm() {
     });
 }
 
-// Load all sections
-document.addEventListener('DOMContentLoaded', async function() {
-    console.log('DOM Content Loaded');
-    const sectionIds = ['home', 'about', 'experience', 'projects', 'contact'];
+function loadBackgroundVideo() {
+    const video = document.querySelector('.video-background video[data-src]');
+    if (!video) return;
 
-    pageTransitionOverlay = document.createElement('div');
-    pageTransitionOverlay.className = 'page-transition-overlay';
-    document.body.appendChild(pageTransitionOverlay);
+    const connection = navigator.connection || navigator.mozConnection || navigator.webkitConnection;
+    if (connection && (connection.saveData || /2g/.test(connection.effectiveType || ''))) return;
+
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+    const source = document.createElement('source');
+    source.src = video.dataset.src;
+    source.type = 'video/mp4';
+    video.appendChild(source);
+    video.removeAttribute('data-src');
+    video.load();
+    video.play().catch(() => {});
+}
+
+function loadAnalytics() {
+    if (window.gtag) return;
+
+    window.dataLayer = window.dataLayer || [];
+    window.gtag = function gtag() {
+        window.dataLayer.push(arguments);
+    };
+
+    const script = document.createElement('script');
+    script.async = true;
+    script.src = 'https://www.googletagmanager.com/gtag/js?id=G-PTND45BEX7';
+    document.head.appendChild(script);
+
+    window.gtag('js', new Date());
+    window.gtag('config', 'G-PTND45BEX7');
+}
+
+// Load all sections
+document.addEventListener('DOMContentLoaded', function() {
+    const sectionIds = ['home', 'about', 'experience', 'projects', 'contact'];
     
     // Add click event listeners to all navigation links
     document.querySelectorAll('.nav-links a[href^="#"]').forEach(link => {
@@ -195,7 +174,7 @@ document.addEventListener('DOMContentLoaded', async function() {
 
     // Load sections
     for (const sectionId of sectionIds) {
-        const loaded = await loadSection(sectionId);
+        const loaded = loadSection(sectionId);
         if (!loaded) {
             console.error(`Failed to load section ${sectionId}`);
         }
@@ -208,7 +187,7 @@ document.addEventListener('DOMContentLoaded', async function() {
     // Handle initial page load with hash
     if (window.location.hash) {
         const sectionId = window.location.hash.substring(1);
-        const targetSection = await ensureSectionReady(sectionId);
+        const targetSection = ensureSectionReady(sectionId);
         if (targetSection) {
             const targetOffset = targetSection.offsetTop - getNavbarHeight();
             window.scrollTo({
@@ -246,51 +225,6 @@ document.addEventListener('DOMContentLoaded', async function() {
     window.addEventListener('scroll', updateActiveNavLink);
     updateActiveNavLink(); // Initial call
 
-    // Add a mutation observer to watch for dynamic content changes
-    const contentObserver = new MutationObserver((mutations) => {
-        // Only add listeners when newly added nodes actually contain scroll links
-        let shouldAdd = false;
-        mutations.forEach((mutation) => {
-            if (mutation.addedNodes.length) {
-                mutation.addedNodes.forEach(node => {
-                    if (node.nodeType === 1) { // ELEMENT_NODE
-                        if (node.classList && node.classList.contains('scroll-link')) {
-                            shouldAdd = true;
-                        } else if (node.querySelector && node.querySelector('.scroll-link')) {
-                            shouldAdd = true;
-                        }
-                    }
-                });
-            }
-        });
-        if (shouldAdd) addScrollLinkListeners();
-    });
-
-    // Start observing the document with the configured parameters
-    contentObserver.observe(document.body, { childList: true, subtree: true });
-
-    // Add scroll-based animations
-    const sections = document.querySelectorAll('.section');
-    const options = {
-        threshold: 0.1
-    };
-
-    const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                entry.target.style.opacity = '1';
-                entry.target.style.transform = 'translateY(0)';
-            }
-        });
-    }, options);
-
-    sections.forEach(section => {
-        section.style.opacity = '0';
-        section.style.transform = 'translateY(20px)';
-        section.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
-        observer.observe(section);
-    });
-
     // Mobile menu toggle
     const createMobileMenu = () => {
         const navbar = document.querySelector('.navbar');
@@ -298,7 +232,9 @@ document.addEventListener('DOMContentLoaded', async function() {
         
         const menuButton = document.createElement('button');
         menuButton.classList.add('menu-button');
-        menuButton.innerHTML = '<i class="fas fa-bars"></i>';
+        menuButton.type = 'button';
+        menuButton.setAttribute('aria-label', 'Toggle navigation');
+        menuButton.textContent = 'Menu';
         
         navbar.appendChild(menuButton);
         
@@ -311,4 +247,9 @@ document.addEventListener('DOMContentLoaded', async function() {
     if (window.innerWidth <= 768) {
         createMobileMenu();
     }
+
+    ['pointerdown', 'keydown', 'scroll'].forEach(eventName => {
+        window.addEventListener(eventName, loadBackgroundVideo, { once: true, passive: true });
+        window.addEventListener(eventName, loadAnalytics, { once: true, passive: true });
+    });
 });
