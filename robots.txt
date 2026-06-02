@@ -1,0 +1,13 @@
+User-agent: *
+Allow: /
+ 
+# Block non-page files from being indexed
+Disallow: /backGround.mp4
+Disallow: /galaxy-background.js
+Disallow: /script.js
+Disallow: /styles.css
+Disallow: /start-localhost.command
+Disallow: /.vscode/
+Disallow: /.DS_Store
+ 
+Sitemap: https://kushalbhattarai1.com.np/sitemap.xml
